@@ -8,6 +8,8 @@ import {
   MAT_DATE_FORMATS,
   MAT_DATE_LOCALE,
 } from '@angular/material/core';
+import { User } from '../../models/user.class';
+import { FormsModule } from '@angular/forms';
 
 export const EU_DATE_FORMATS = {
   parse: {
@@ -29,6 +31,7 @@ export const EU_DATE_FORMATS = {
     MatInputModule,
     MatFormFieldModule,
     MatDatepickerModule,
+    FormsModule,
   ],
   providers: [
     provideNativeDateAdapter(),
@@ -38,4 +41,12 @@ export const EU_DATE_FORMATS = {
   templateUrl: './dialog-add-user.component.html',
   styleUrl: './dialog-add-user.component.scss',
 })
-export class DialogAddUserComponent {}
+export class DialogAddUserComponent {
+  user = new User();
+  birthDate!: Date;
+
+  saveUser() {
+    this.user.birthDate = this.birthDate.getTime();
+    console.log('Current user is', this.user);
+  }
+}
